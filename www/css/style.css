@@ -1,0 +1,21 @@
+/* Empty. Add your own CSS if you like */
+
+
+.articles-border{
+	border:1px solid #ddd;
+	height:45px;
+	text-align:right;
+}
+.articlesborderback{
+	background:red;
+}
+.articles-ajouter{
+	border:1px solid #ddd;
+	height:50px;
+	background:red;
+}
+
+.popup-container.popup {
+  width: 400px;
+  height: 350px;
+}

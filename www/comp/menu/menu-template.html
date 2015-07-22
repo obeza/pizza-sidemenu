@@ -1,0 +1,18 @@
+<ion-view title="Menu">
+
+
+
+  <ion-content class="padding">
+
+    <ul class="list">
+      <li ng-repeat="categorie in categories">
+        <a class="item item-icon-right" href="#/app/menu/articles/{{categorie.id}}">        
+          <h3>{{categorie.nom}}</h3>
+
+          <i class="icon ion-chevron-right icon-accessory"></i>
+          </a>
+      </li>
+    </ul>
+
+  </ion-content>
+</ion-view>
