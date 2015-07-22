@@ -23,7 +23,7 @@ $scope.voir = function(article) {
 
   // An elaborate, custom popup
   var myPopup = $ionicPopup.show({
-    template: '<img src="img/happy300x300.jpg" width="100%" alt="" /><input type="password" ng-model="data.wifi"><div class="button-bar"><a class="button" ng-click="test()">First</a><a class="button">Second</a></div>',
+    template: '<img src="img/happy300x300.jpg" width="100%"/><input type="password" ng-model="data.wifi"><div class="button-bar"><a class="button" ng-click="test()">First</a><a class="button">Second</a></div>',
     title: article.nom,
     subTitle: article.description,
     scope: $scope,
