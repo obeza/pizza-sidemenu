@@ -1,0 +1,38 @@
+<ion-view title="Panier">
+
+<ion-header-bar align-title="left" class="bar-positive">
+  <div class="buttons">
+    <button class="button" ng-click="doSomething()">Left Button</button>
+  </div>
+  <h1 class="title">Title!</h1>
+  <div class="buttons">
+    <button class="button">Right Button</button>
+  </div>
+</ion-header-bar>
+
+
+  <ion-content>
+
+    <div class="list">	   
+	    <a  ng-repeat="article in articles track by $index"
+          class="item item-icon-right" 
+          href="#/tab/panier/modifier/{{$index}}">      
+	    		<h3>{{article.nom}}</h3>
+          <p>Qte : {{article.quantite}}</p>
+
+          <span class="item-note">{{article.total}}</span>
+
+        <i class="icon ion-chevron-right icon-accessory"></i>      	
+	    </a>
+    </div>
+
+<div class="card">
+  <div class="item item-text-wrap">
+
+    <div class="text-droite"><h2>total :{{getTotalPrix()}}</div>
+
+  </div>
+</div>
+
+  </ion-content>
+</ion-view>

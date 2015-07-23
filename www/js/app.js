@@ -49,7 +49,15 @@ var app = angular.module('starter', ['ionic', 'PizzaServices'])
       }
     }
   })
-
+  .state('app.panier', {
+    url: '/panier',
+    views: {
+      'menuContent': {
+        templateUrl: 'comp/panier/panier-template.html',
+        controller: 'PanierCtrl'
+      }
+    }
+  })
 ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/menu');

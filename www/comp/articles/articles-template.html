@@ -1,15 +1,16 @@
 <ion-view view-title="Menu">
+
   <ion-content class="padding">
 	
 	<ul class="list">
 	    <li ng-repeat="article in articles | filter:{categorie:catId}">
-	    	<a  class="item item-icon-right" href="#/tab/menu/article/{{indexDe(article)}}">	
+	    	<div  class="item item-icon-right">	
 	    	<!--  ng-click="voir($index)"-->      
 	    		<h3>{{article.nom}}</h3>
 	    		<p>{{article.description}}</p>
 	    		<i class="icon icon-accessory big">{{article.prix}}</i>
 
-	      	</a>
+	      	</div>
 	      	<div class="articles-border"><button class="button" ng-click="voir(indexDe(article))" ng-class="{articlesborderback:ajouter[$index]}">AjouterG</button></div>
 	      	<div class="articles-ajouter" ng-show="ajouter[$index]"></div>
 	    </li>
