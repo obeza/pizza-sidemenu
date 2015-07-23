@@ -44,11 +44,12 @@ var app = angular.module('starter', ['ionic', 'PizzaServices'])
     url: '/menu/articles/:catId',
     views: {
       'menuContent': {
-        templateUrl: 'comp/menu/articles-template.html',
+        templateUrl: 'comp/articles/articles-template.html',
         controller: 'ArticlesCtrl'
       }
     }
   })
+
 ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/menu');

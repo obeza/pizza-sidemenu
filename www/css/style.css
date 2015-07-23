@@ -19,3 +19,35 @@
   width: 400px;
   height: 350px;
 }
+.item-icon-right .icon-accessory.big{
+	color:#111;
+}
+.prix-pizza{
+	font-size: 16px;
+}
+.button-bar > .button{
+	padding:0 0px;
+}
+.droite{
+	text-align: right;
+}
+.modal-top{
+	margin:0px;
+	background: #E67E22;
+}
+.modal-bt-annuler{
+	font-size: 16px;
+	color:#fff;
+}
+.quantite{
+	text-align: center;
+	font-size: 16px;
+
+}
+.card .item.article{
+	border:0;
+}
+.article-total {
+	font-size: 16px;
+	text-align: right;
+}
