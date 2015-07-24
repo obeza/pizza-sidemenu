@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'PizzaServices'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,7 +20,18 @@ var app = angular.module('starter', ['ionic', 'PizzaServices'])
       StatusBar.styleDefault();
     }
   });
+
+  $rootScope.quantite = 0;
+
 })
+
+.config(['$ionicConfigProvider',function($ionicConfigProvider) {
+
+  $ionicConfigProvider.backButton.previousTitleText(false)
+  $ionicConfigProvider.backButton.text('Retour');
+  //$ionicConfigProvider.views.maxCache(0);
+
+}])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -61,4 +72,6 @@ var app = angular.module('starter', ['ionic', 'PizzaServices'])
 ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/menu');
-});
+})
+
+;

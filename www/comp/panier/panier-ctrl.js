@@ -1,4 +1,4 @@
-app.controller('PanierCtrl', ['$scope','panier', function($scope, panier){
+app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope, panier, $ionicModal){
 	
 	$scope.articles = panier.liste;
   $scope.prixTotal = 0;
@@ -18,5 +18,90 @@ app.controller('PanierCtrl', ['$scope','panier', function($scope, panier){
     
     return prixTotal.toFixed(2);
   };
+
+  $scope.indexDe = function(obj){
+      var idx = $scope.articles.indexOf(obj);
+      return idx;
+  }
+
+  //
+  // template pour les articles pizza
+  //
+  $ionicModal.fromTemplateUrl('templates/modal-article-modifier.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+
+  $scope.voir = function(articleId) {
+    console.log("articleId " + articleId);
+    $scope.articleId= articleId;
+    $scope.article = $scope.articles[articleId];
+
+
+    if($scope.article.prix>0){
+      console.log("simple");
+      //$scope.modalSimple.show();
+      $scope.choixTaille = true;
+      $scope.article.PanierPrix = $scope.article.prix;
+    } else {
+      // console.log("pizza " + article);
+      $scope.article.PanierPrix = $scope.article.prix2;
+      console.log("prix 2 = " + $scope.article.PanierPrix );
+      $scope.active = 'prix2';
+      
+    }
+    $scope.modal.show();
+    
+
+  }
+
+  $scope.fermerModalPizza = function(){
+    $scope.modal.hide();
+  };
+
+  $scope.setActive = function(type) {
+      $scope.active = type;
+      $scope.article.PanierPrix = $scope.article[type];
+      total();
+  };
+
+  $scope.isActive = function(type) {
+      //$scope.article.PanierPrix = $scope.article[type];
+      return type === $scope.active;
+
+  };
+
+  $scope.plus = function(){
+    $scope.article.quantite += 1; 
+    total();
+  };
+
+  $scope.moins = function(){
+    var q = $scope.article.quantite-1;
+    if (q>=0){
+      $scope.article.quantite = q;
+      total();
+    }
+  };
   
+  var total = function(){
+    $scope.article.total = $scope.article.quantite*$scope.article.PanierPrix;
+    $scope.article.total = $scope.article.total.toFixed(2);
+  };
+
+
+  $scope.panierEffacer = function(){
+    panier.supprimer($scope.articleId);
+    $scope.modal.hide();
+  };
+
+  $scope.PanierModifier = function(){
+    panier.modifier($scope.articleId, $scope.article);
+    $scope.modal.hide();
+  };
+
+
 }]);
+

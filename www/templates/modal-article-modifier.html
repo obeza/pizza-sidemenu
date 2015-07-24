@@ -2,14 +2,9 @@
     <ion-header-bar class="bar-balanced">
         <a class="button icon-left ion-chevron-left button-clear" ng-click="fermerModalPizza()"><b>Annuler</b></a>
         
-        <a class="button button-icon icon ion-android-favorite-outline"></a>
+        <a class="button button-assertive" ng-click="panierEffacer()">Effacer</a>
       </ion-header-bar>
       <ion-content>
-
-
-    
-
-
 
       <div class="card">
         <div class="item item-divider">
@@ -18,15 +13,17 @@
         <div class="item item-text-wrap">
  
  <ul class="list">
-    <li class="item"> 
+    <li class="item">
+      <div><img src="img/article-pizza.jpeg" alt=""></div>
        {{article.description}}
     </li> 
     <li class="item article"> 
-            <div class="button-bar" ng-hide="choixTaille">
-        <a class="button" ng-class="{'button-positive': isActive('prix1')}" ng-click="setActive('prix1')"><b>Petite</b><div>{{article.prix1}}€</div></a>
-        <a class="button" ng-class="{'button-positive': isActive('prix2')}" ng-click="setActive('prix2')"><b>Moyenne</b><div>{{article.prix2}}€</div></a>
-        <a class="button" ng-class="{'button-positive': isActive('prix3')}" ng-click="setActive('prix3')"><b>Grande</b><div>{{article.prix3}}€</div></a>
-    </div>  
+      <div ng-show="choixTaille"><h1 class="quantite">Prix : {{article.prix}}€</h1></div>
+      <div class="button-bar" ng-hide="choixTaille">
+          <a class="button" ng-class="{'button-positive': isActive('prix1')}" ng-click="setActive('prix1')"><b>Petite</b><div>{{article.prix1}}€</div></a>
+          <a class="button" ng-class="{'button-positive': isActive('prix2')}" ng-click="setActive('prix2')"><b>Moyenne</b><div>{{article.prix2}}€</div></a>
+          <a class="button" ng-class="{'button-positive': isActive('prix3')}" ng-click="setActive('prix3')"><b>Grande</b><div>{{article.prix3}}€</div></a>
+      </div>  
 
     <li class="item article">
       <div class="quantite"><strong>Quantité :</strong></div>
@@ -54,8 +51,8 @@
 
 
     </ion-content>
-<ion-footer-bar class="bar-balanced">
-<div class="title"></div>
-<a class="button button-light" ng-click="fermerModalPizza()"><b>Ajouter au panier</b></a>
+    <ion-footer-bar class="bar-balanced">
+      <div class="title"></div>
+      <a class="button" ng-class="article['quantite'] > 0 ? 'button-assertive' : 'button-light'" ng-click="PanierModifier()"><b>Modifier le panier</b></a>
     </ion-footer-bar>    
   </ion-modal-view>

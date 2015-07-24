@@ -1,5 +1,7 @@
 
-app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', function($scope, dataService, $stateParams, $ionicModal){
+app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout){
+
+  $scope.choixTaille = false;
 
 	dataService.get().then( function(d){
 		//console.log( "reponse2 : " + JSON.stringify(d) );
@@ -17,44 +19,37 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
   //
   // template pour les articles pizza
   //
-  $ionicModal.fromTemplateUrl('templates/article-ajouter-pizza.html', {
+  $ionicModal.fromTemplateUrl('templates/modal-article-ajouter.html', {
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
-    $scope.modalPizza = modal;
-  });
-
-  //
-  // template pour les articles simples
-  //
-  $ionicModal.fromTemplateUrl('templates/article-ajouter-simple.html', {
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal) {
-    $scope.modalSimple = modal;
+    $scope.modal = modal;
   });
 
   $scope.voir = function(article) {
     $scope.article = $scope.articles[article];
 
 
-    if(article.prix>0){
+    if($scope.article.prix>0){
       console.log("simple");
-      $scope.modalSimple.show();
+      //$scope.modalSimple.show();
+      $scope.choixTaille = true;
+      $scope.article.PanierPrix = $scope.article.prix;
     } else {
       console.log("pizza " + article);
       $scope.article.PanierPrix = $scope.article.prix2;
       console.log("prix 2 = " + $scope.article.PanierPrix );
       $scope.active = 'prix2';
-      $scope.modalPizza.show();
+      
     }
+    $scope.modal.show();
     $scope.article.quantite = 0;
     $scope.article.total = 0;
 
   }
 
   $scope.fermerModalPizza = function(){
-    $scope.modalPizza.hide();
+    $scope.modal.hide();
   };
 
   $scope.setActive = function(type) {
@@ -85,6 +80,26 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
   var total = function(){
     $scope.article.total = $scope.article.quantite*$scope.article.PanierPrix;
     $scope.article.total = $scope.article.total.toFixed(2);
+  };
+
+  $scope.PanierAjouter = function(){
+    console.log("qt : " + $scope.article['quantite']);
+
+    if ($scope.article['quantite']>0){
+      panier.ajouter($scope.article);
+      
+      var alertPopup = $ionicPopup.alert({
+          title: 'Panier',
+          template: 'Cet article a été ajouté',
+          buttons:[]
+        });
+        $timeout(function() {
+          alertPopup.close(); //close the popup after 3 seconds for some reason
+        }, 800);
+      $scope.modal.hide();
+      console.log("pass");
+    }
+    
   };
 
 

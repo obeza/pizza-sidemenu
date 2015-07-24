@@ -18,6 +18,10 @@ app.service('panier', function($rootScope){
 		this.liste[id] = data;
 	};
 
+	this.supprimer = function(id){
+		this.liste.splice(id, 1);
+	};
+
 
 
 });
