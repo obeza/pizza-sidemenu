@@ -23,55 +23,30 @@ var app = angular.module('starter', ['ionic', 'PizzaServices'])
 
   $rootScope.quantite = 0;
 
+$ionicPlatform.registerBackButtonAction(function (event) {
+    if($ionicHistory.currentStateName() == "app.senregistrer"){
+      event.preventDefault();
+      // or do nothing
+    } else if($ionicHistory.currentStateName() == "app.menu"){
+      ionic.Platform.exitApp();
+      // or do nothing
+    }
+    else {
+      $ionicHistory.goBack();
+    }
+  }, 100);
+
 })
 
 .config(['$ionicConfigProvider',function($ionicConfigProvider) {
 
   $ionicConfigProvider.backButton.previousTitleText(false)
   $ionicConfigProvider.backButton.text('Retour');
-  //$ionicConfigProvider.views.maxCache(0);
+  $ionicConfigProvider.views.forwardCache(false);
+  $ionicConfigProvider.views.maxCache(0);
 
 }])
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html'
-  })
-
-  .state('app.menu', {
-    url: '/menu',
-    views: {
-      'menuContent': {
-        templateUrl: 'comp/menu/menu-template.html',
-        controller: 'MenuCtrl'
-      }
-    }
-  })
-  .state('app.menu-articles', {
-    url: '/menu/articles/:catId',
-    views: {
-      'menuContent': {
-        templateUrl: 'comp/articles/articles-template.html',
-        controller: 'ArticlesCtrl'
-      }
-    }
-  })
-  .state('app.panier', {
-    url: '/panier',
-    views: {
-      'menuContent': {
-        templateUrl: 'comp/panier/panier-template.html',
-        controller: 'PanierCtrl'
-      }
-    }
-  })
-;
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/menu');
-})
 
 ;

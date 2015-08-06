@@ -23,3 +23,19 @@ app.directive('panierOuvrir', function($ionicModal) {
     }
   };
 });
+
+app.directive('pwCheck', [function () {
+                return {
+                    require: 'ngModel',
+                    link: function (scope, elem, attrs, ctrl) {
+
+            var me = attrs.ngModel;
+            var matchTo = attrs.pwCheck;
+
+            scope.$watch('[me, matchTo]', function(value){
+              ctrl.$setValidity('pwmatch', scope[me] === scope[matchTo] );
+            });
+
+                    }
+                }
+            }]);

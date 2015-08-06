@@ -3,24 +3,36 @@
 
   <ion-content>
 
-    <div class="list">	   
-	    <a  ng-repeat="article in articles track by $index"          
-          ng-click="voir(indexDe(article))"
 
-          class="item item-thumbnail-left"
-      >   
-          <img src="img/article-pizza.jpeg" alt="">   
-	    		<h3>{{article.nom}}</h3>
-          <p>Qte : {{article.quantite}}</p>
+    <div class="card" ng-show="getTotalPrix()<=0">
+      <div class="item item-text-wrap panier-vide">
+        <h2>Votre panier est vide.</h2>
+      </div>
+    </div>
 
-          <p>{{article.total}}€</p>
 
-        <div class="droite">
-          <button class="button bt-ajouter" >
-            Modifier
-          </button>
-        </div>     	
-	    </a>
+    <div class="list">
+      <div
+      class="card" 
+      ng-repeat="article in articles track by $index"
+      >
+  	    <a
+            ng-click="voir(indexDe(article))"
+            class="item item-thumbnail-left"
+        >
+            <img src="img/article-pizza.jpeg" alt="">
+  	    		<h3>{{article.nom}}</h3>
+            <p>Qte : {{article.quantite}}</p>
+
+            <p>{{article.total}}€</p>
+
+          <div class="droite">
+            <button class="button bt-ajouter" >
+              Modifier
+            </button>
+          </div>
+  	    </a>
+      </div>
     </div>
 
   <div class="card">
@@ -30,6 +42,14 @@
 
     </div>
   </div>
+
+  <a
+    ng-show="getTotalPrix()>0"
+    href="#/app/caisse"
+    nav-direction="enter"
+    class="button button-full">
+    Passer au paiement
+  </a>
 
   </ion-content>
 </ion-view>

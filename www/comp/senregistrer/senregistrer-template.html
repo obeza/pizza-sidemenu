@@ -1,0 +1,192 @@
+<ion-view view-title="Menu">
+
+
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button nav-direction="enter">Annuler
+      </ion-nav-back-button>
+
+    </ion-nav-bar>
+
+
+	<ion-nav-title>
+      S'enregistrer
+    </ion-nav-title>
+
+  <ion-content class="padding">
+
+<form name="form" ng-submit="senregistrer(user)">
+
+
+<ion-slide-box ng-init="disableSwipe()">
+
+  <ion-slide>
+    <div class="box">
+    <div class="list senregistrer-space-top list-inset">
+    	
+  <!--   
+  		Prenom   
+  				-->
+  <label class="item item-input">
+    <input type="text" placeholder="Prénom" name="uPrenom" ng-model="user.prenom" required="">
+
+    <i ng-show="form.uPrenom.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"></i>
+   
+    <i ng-hide="form.uPrenom.$error.required" class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>   
+  </label>
+
+  <!--   
+  		Nom  
+  				-->
+  <label class="item item-input">
+    <input type="text" placeholder="Nom"  name="uNom" ng-model="user.nom" required="">
+
+    <i ng-show="form.uNom.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"></i>
+   
+    <i ng-hide="form.uNom.$error.required" class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>   
+  </label>
+
+  <!--   
+  		Téléphone   
+  					-->
+  <label class="item item-input">
+    <input type="tel" placeholder="Téléphone" name="uTel" ng-model="user.tel" required maxlength="10" minlength="10">
+
+    <i ng-show="form.uTel.$error.minlength || form.uTel.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"></i>
+   
+    <i ng-hide="form.uTel.$error.minlength || form.uTel.$error.required " class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>   
+  </label>
+
+
+  <!--    <div>form.uTel.$error : {{form.uTel.$error}}</div>
+      Boutton ::: Suivant   
+            -->
+
+	<button 
+    class="button button-block button-assertive" 
+    ng-disabled="form.uPrenom.$error.required || form.uNom.$error.required || form.uTel.$error.required || form.uTel.$error.minlength "
+    ng-click="nextSlide()"
+    type="button">
+ Continuer 
+	</button>
+
+    </div>
+    </div>
+  </ion-slide>
+
+  <ion-slide>
+    <div class="box list senregistrer-space-top list-inset">
+    
+    <label class="item item-input item-select">
+      <div class="input-label">
+      Votre ville
+    </div>
+      <select name="uVille" ng-model="user.ville" required>
+        <option value="">Sélectionnez votre ville</option>
+        <option ng-repeat="ville in villes" value="{{$index+1}}">{{ville.nom}}</option>
+      </select>
+
+
+
+    </label>
+
+    
+
+    <label class="item item-input">
+      <textarea ng-model="user.adresse" name="uAdresse" placeholder="adresse" rows="2" required></textarea>
+
+      <i ng-show="form.uAdresse.$error.required" class="icon ion-close-round placeholder-icon"></i>
+   
+      <i ng-hide="form.uAdresse.$error.required" class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>
+
+    </label>
+
+  <!--   
+      Boutton ::: Suivant   
+            -->
+  
+  <button 
+    class="button button-block button-assertive" 
+    ng-disabled="form.uVille.$error.required || form.uAdresse.$error.required"
+    ng-click="nextSlide()"
+    type="button">
+ Continuer 
+  </button>
+
+
+
+
+    </div>
+  </ion-slide>
+
+  <ion-slide>
+
+<div class="box list list-inset senregistrer-space-top"> 
+
+  <!--   
+      Email  
+            -->
+
+    <label class="item item-input"> 
+    <span class="input-label">Email :</span> 
+      <input ng-model="user.email" name="uEmail" required type="email" placeholder="Email" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">   
+    
+    <i ng-show="form.uEmail.$error.pattern || form.uEmail.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"></i>
+   
+    <i ng-hide="form.uEmail.$error.pattern || form.uEmail.$error.required" class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>   
+  </label>
+    </label>
+
+  <!--   
+      Mot de passe  
+            -->
+
+    <label class="item item-input">
+      <span class="input-label">Mot de passe :</span>
+      <input 
+      ng-model="user.passe" 
+      ng-minlength="6" 
+      placeholder="******" 
+      name="uPasse" 
+      type="password" 
+      required>
+
+      <i ng-show="form.uPasse.$error.required || form.uPasse.$error.minlength" class="icon ion-close-round placeholder-icon form-icon-required"></i>
+   
+      <i ng-hide="form.uPasse.$error.required || form.uPasse.$error.minlength" class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>
+
+    </label>
+
+  <!--   
+      Mot de passe ::: confirmer  
+            -->
+    <label class="item item-input">
+      <span class="input-label">Confirmer</span>
+      <input ng-model="user.passe2" name="uPasse2" type="password" required pwCheck="user.passe">
+
+      <i ng-show="user.passe!==user.passe2 || form.uPasse2.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"></i>
+   
+      <i ng-show="user.passe===user.passe2 && user.passe" class="icon ion-checkmark-round placeholder-icon form-icon-required"></i>
+
+    </label>
+
+<div ng-show="erreurEmail" class="alert-email">Ce mail est déjà enregistré.</div>
+
+      <button 
+        class="button button-block button-assertive" 
+        ng-disabled="user.passe!==user.passe2 || form.uEmail.$error.pattern || form.uEmail.$error.required || form.uPasse.$error.required || form.uPasse.$error.minlength"
+        type="submit"
+      >
+ Continuer 
+  </button> 
+      
+    </div> <!-- fin de list2 -->
+
+  </ion-slide>
+
+</ion-slide-box>
+
+
+
+</form>
+  </ion-content>
+</ion-view>

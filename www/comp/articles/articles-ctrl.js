@@ -3,11 +3,13 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
 
   $scope.choixTaille = false;
 
-	dataService.get().then( function(d){
-		//console.log( "reponse2 : " + JSON.stringify(d) );
-		$scope.articles = d['articles'];
+	// dataService.get().then( function(d){
+	// 	//console.log( "reponse2 : " + JSON.stringify(d) );
+	// 	$scope.articles = d['articles'];
 
-	});
+	// });
+
+  $scope.articles = dataService.getSave['articles'];
 
 	$scope.catId = $stateParams.catId;
 
@@ -35,12 +37,13 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
       //$scope.modalSimple.show();
       $scope.choixTaille = true;
       $scope.article.PanierPrix = $scope.article.prix;
+      $scope.active = 'prix';
     } else {
       console.log("pizza " + article);
       $scope.article.PanierPrix = $scope.article.prix2;
       console.log("prix 2 = " + $scope.article.PanierPrix );
       $scope.active = 'prix2';
-      
+
     }
     $scope.modal.show();
     $scope.article.quantite = 0;
@@ -65,7 +68,7 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
   };
 
   $scope.plus = function(){
-    $scope.article.quantite += 1; 
+    $scope.article.quantite += 1;
     total();
   };
 
@@ -76,18 +79,24 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
       total();
     }
   };
-  
+
   var total = function(){
     $scope.article.total = $scope.article.quantite*$scope.article.PanierPrix;
     $scope.article.total = $scope.article.total.toFixed(2);
   };
 
+  //
+  //  Ajouter au panier
+  //
+
   $scope.PanierAjouter = function(){
     console.log("qt : " + $scope.article['quantite']);
 
+    $scope.article.active = $scope.active;
+
     if ($scope.article['quantite']>0){
       panier.ajouter($scope.article);
-      
+
       var alertPopup = $ionicPopup.alert({
           title: 'Panier',
           template: 'Cet article a été ajouté',
@@ -99,9 +108,8 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
       $scope.modal.hide();
       console.log("pass");
     }
-    
+
   };
 
 
 }]);
-

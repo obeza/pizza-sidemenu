@@ -1,5 +1,5 @@
 app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope, panier, $ionicModal){
-	
+
 	$scope.articles = panier.liste;
   $scope.prixTotal = 0;
 	$scope.test = "ok";
@@ -9,13 +9,13 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
   $scope.getTotalPrix = function () {
     var i = 0,
         prixTotal = 0;
-    
+
     for (i; i < $scope.articles.length; i = i + 1) {
       if ($scope.articles[i].total) {
         prixTotal = prixTotal + parseFloat($scope.articles[i].total);
       }
     }
-    
+
     return prixTotal.toFixed(2);
   };
 
@@ -48,12 +48,13 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
     } else {
       // console.log("pizza " + article);
       $scope.article.PanierPrix = $scope.article.prix2;
-      console.log("prix 2 = " + $scope.article.PanierPrix );
-      $scope.active = 'prix2';
-      
+      //console.log("prix 2 = " + $scope.article.PanierPrix );
+
+
     }
+		$scope.active = $scope.article.active;
     $scope.modal.show();
-    
+
 
   }
 
@@ -74,7 +75,7 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
   };
 
   $scope.plus = function(){
-    $scope.article.quantite += 1; 
+    $scope.article.quantite += 1;
     total();
   };
 
@@ -85,7 +86,7 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
       total();
     }
   };
-  
+
   var total = function(){
     $scope.article.total = $scope.article.quantite*$scope.article.PanierPrix;
     $scope.article.total = $scope.article.total.toFixed(2);
@@ -98,10 +99,22 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
   };
 
   $scope.PanierModifier = function(){
+		$scope.article.active = $scope.active;
     panier.modifier($scope.articleId, $scope.article);
     $scope.modal.hide();
   };
 
+  /*
+  **
+      affichage des boutons : connecter, créer un compte ou payer
+  **
+  */
+
+  $scope.conn = false;
+  if (localStorage.auth_token){
+    $scope.conn = true;
+
+  }
+
 
 }]);
-
