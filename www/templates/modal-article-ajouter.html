@@ -2,9 +2,10 @@
     <ion-header-bar class="bar-balanced">
         <a class="button icon-left ion-chevron-left button-clear" ng-click="fermerModalPizza()"><b>Annuler</b></a>
 
-        <a class="button button-icon icon ion-android-favorite-outline"></a>
+        <bt-favoris ng-model="article.nom"></bt-favoris>
+
       </ion-header-bar>
-      <ion-content>
+      <ion-content class="back-articles">
 
       <div class="card">
         <div class="item item-divider">
@@ -39,7 +40,6 @@
 
         </div>
 
-<h1>active :{{active}}</h1>
 
         <div class="item item-divider">
 
@@ -55,9 +55,13 @@
       </div>
 
 
+<div class="bar bar-balanced ">
+<a class="button pull-right" ng-class="article['quantite'] > 0 ? 'button-assertive' : 'button-light'" ng-click="PanierAjouter()"><b>Ajouter au panier</b></a>
+</div>
+
+<div class="bottom-space"></div>
+
+
     </ion-content>
-<ion-footer-bar class="bar-balanced">
-<div class="title"></div>
-<a class="button" ng-class="article['quantite'] > 0 ? 'button-assertive' : 'button-light'" ng-click="PanierAjouter()"><b>Ajouter au panier</b></a>
-    </ion-footer-bar>
+
   </ion-modal-view>

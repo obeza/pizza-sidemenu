@@ -4,7 +4,7 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
   $scope.prixTotal = 0;
 	$scope.test = "ok";
 
-	console.log ("ok");
+
 
   $scope.getTotalPrix = function () {
     var i = 0,

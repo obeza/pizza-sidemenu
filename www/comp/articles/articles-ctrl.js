@@ -1,5 +1,5 @@
 
-app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout){
+app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', '$rootScope', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout, $rootScope){
 
   $scope.choixTaille = false;
 
@@ -9,7 +9,8 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
 
 	// });
 
-  $scope.articles = dataService.getSave['articles'];
+  var data = dataService.getSave;
+  $scope.articles = data['articles'];
 
 	$scope.catId = $stateParams.catId;
 
@@ -31,17 +32,20 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
   $scope.voir = function(article) {
     $scope.article = $scope.articles[article];
 
+    console.log("articleId " + $scope.article.id);
+
+    $rootScope.$broadcast("articleId", $scope.article.id);
 
     if($scope.article.prix>0){
-      console.log("simple");
+      //console.log("simple");
       //$scope.modalSimple.show();
       $scope.choixTaille = true;
       $scope.article.PanierPrix = $scope.article.prix;
       $scope.active = 'prix';
     } else {
-      console.log("pizza " + article);
+      //console.log("pizza " + article);
       $scope.article.PanierPrix = $scope.article.prix2;
-      console.log("prix 2 = " + $scope.article.PanierPrix );
+      //console.log("prix 2 = " + $scope.article.PanierPrix );
       $scope.active = 'prix2';
 
     }
@@ -50,6 +54,8 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
     $scope.article.total = 0;
 
   }
+
+
 
   $scope.fermerModalPizza = function(){
     $scope.modal.hide();

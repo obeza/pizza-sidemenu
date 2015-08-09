@@ -1,0 +1,43 @@
+app.factory('paypalService', [function () {
+	
+
+	return {
+		initPaymentUI : function () {
+    		var clientIDs = {
+       			"PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
+       			"PayPalEnvironmentSandbox": "Abtq1Of7qoCH_DTTp9BpRouEbueud3sl8zWdeapITEGsICV3r_Sggu1mNhsjAshGwfJk6fgKBbSrvWgG"
+     		};
+     		PayPalMobile.init(clientIDs, this.onPayPalMobileInit);
+   		},
+   		onPayPalMobileInit : function() {
+     		// must be called
+     		// use PayPalEnvironmentNoNetwork mode to get look and feel of the flow
+
+     		PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", this.configuration(), this.onPrepareRender);
+   		},
+   		configuration : function () {
+
+     		// for more options see `paypal-mobile-js-helper.js`
+     		var config = new PayPalConfiguration({merchantName: "My test shop", merchantPrivacyPolicyURL: "https://mytestshop.com/policy", merchantUserAgreementURL: "https://mytestshop.com/agreement"});
+     		return config;
+   		},
+   		onPrepareRender : function() {
+   			alert('paypal render');
+   			PayPalMobile.renderSinglePaymentUI(this.createPayment(), this.onSuccesfulPayment, this.onUserCanceled);
+     
+   		},
+   		createPayment : function () {
+     		var paymentDetails = new PayPalPaymentDetails("50.00", "0.00", "0.00");
+     		var payment = new PayPalPayment("50.00", "USD", "Awesome Sauce", "Sale", paymentDetails);
+     		return payment;
+   		},
+   		onSuccesfulPayment : function(payment) {
+     		alert("payment success: " + JSON.stringify(payment, null, 4));
+   		},
+   		onUserCanceled : function(result) {
+     		alert("cancel : " + result);
+   		}
+	};
+
+
+}])

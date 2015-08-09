@@ -1,8 +1,9 @@
-app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserService', '$ionicLoading', function ($scope, $http, dataService, $state, UserService, $ionicLoading) {
+app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserService', '$ionicLoading', 'urlService', function ($scope, $http, dataService, $state, UserService, $ionicLoading, urlService) {
 	
 	$scope.login = {};
 	$scope.login.etab = dataService.getEtabId;
-
+	$ionicLoading.hide();
+	
 	$scope.connecter = function(login){
 		console.log('login ' + JSON.stringify(login));
 
@@ -10,13 +11,10 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
       		template: 'Chargement...'
     	});
 
-		var url = dataService.urlApi + 'app/utilisateur/login';
+		var url = urlService.api + 'app/utilisateur/login';
 
 		$http.post( url, login ).
 		success(function(data, status, headers, config) {
-		    // this callback will be called asynchronously
-		    // when the response is available
-		    console.log("msg " + data.msg);
 		    $ionicLoading.hide();
 		    if (data.msg==="ok"){
 		    	console.log("token " + data.token);
@@ -32,8 +30,8 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
 		error(function(data, status, headers, config) {
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
+		    alert('impossible de se connecter...');
 		});
 	};
-
 
 }]);

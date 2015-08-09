@@ -11,6 +11,7 @@ app.factory('authInterceptor', ['$q', '$location', function($q, $location){
       if (response.status === 401){
         console.log('status 401');
         //$state.go('app.login');
+        localStorage.auth_token = null
         $location.path('app/login');
       }
       return $q.reject(response);

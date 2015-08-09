@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'PizzaServices'])
+var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'ngCordova', 'angularLazyImg', 'btFavoris'])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {

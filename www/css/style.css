@@ -102,3 +102,41 @@ div.footer-button a.button.button-full {
 .panier-vide{
 	padding:100px;
 }
+.back-pizza{
+	background: url("../img/back-pizzao.jpg") no-repeat center center fixed;
+	position: absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background-size: cover;
+}
+.back-blur{
+	background: url("../img/back-pizza.jpg") no-repeat center center fixed;
+	position: absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	background-size: cover;
+}
+.button.login-oublie{
+	color:#000;
+}
+.input-invisible{
+	opacity: 0.9;
+
+}
+.button.no-opacity{
+	opacity: 1;
+}
+
+.back-menu{
+	background:#2C3E50;
+}
+.back-menu .list{
+	background-color: transparent;
+}
+.bottom-space{
+	height:80px;
+}

@@ -1,4 +1,4 @@
-<ion-view view-title="Menu">
+<ion-view view-title="Menu" >
 
     <ion-nav-bar class="bar-stable">
 
@@ -17,7 +17,7 @@
 
     </ion-nav-bar>
 
-  <ion-content class="padding">
+  <ion-content class="padding back-articles">
 
 	<div class="list">
 
@@ -26,14 +26,13 @@
           ng-click="voir(indexDe(article))"
           class="item item-thumbnail-left"
 	    	>
-	    		<img src="img/article-pizza.jpeg" alt="">
+	    		<img lazy-img="img/article-pizza.jpeg" alt="">
 	    		<h3>{{article.nom}}</h3>
 	    		<p>{{article.description}}</p>
 	    		<p ng-show="article.prix>0">Prix : {{article.prix}}€</p>
           <p ng-show="article.prix<=0">Prix : petite {{article.prix1}}€, moyenne {{article.prix2}}€, grande {{article.prix3}}€</p>
-	    		<div class="droite"><button class="button bt-ajouter" >
-					Ajouter
-			</button></div>
+	    		<div class="droite"><button class="button bt-ajouter button-energized" >Ajouter</button>
+        </div>
 
 	      	</div>
 

@@ -1,7 +1,7 @@
 <ion-view title="Panier">
 
 
-  <ion-content>
+  <ion-content class="padding back-articles">
 
 
     <div class="card" ng-show="getTotalPrix()<=0">
@@ -13,7 +13,7 @@
 
     <div class="list">
       <div
-      class="card" 
+      
       ng-repeat="article in articles track by $index"
       >
   	    <a
@@ -27,7 +27,7 @@
             <p>{{article.total}}€</p>
 
           <div class="droite">
-            <button class="button bt-ajouter" >
+            <button class="button bt-ajouter button-energized" >
               Modifier
             </button>
           </div>
@@ -47,9 +47,10 @@
     ng-show="getTotalPrix()>0"
     href="#/app/caisse"
     nav-direction="enter"
-    class="button button-full">
-    Passer au paiement
+    class="button button-block button-energized">
+    Passer la commande
   </a>
+
 
   </ion-content>
 </ion-view>

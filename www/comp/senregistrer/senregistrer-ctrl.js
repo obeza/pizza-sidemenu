@@ -1,4 +1,4 @@
-app.controller('SenregistrerCtrl', ['$scope', '$ionicSlideBoxDelegate', '$http', 'dataService', '$state', function ($scope, $ionicSlideBoxDelegate, $http, dataService, $state) {
+app.controller('SenregistrerCtrl', ['$scope', '$ionicSlideBoxDelegate', '$http', 'dataService', '$state', 'urlService', function ($scope, $ionicSlideBoxDelegate, $http, dataService, $state, urlService) {
 	
 	$scope.test = "ok";
 	$scope.user = {};
@@ -17,7 +17,7 @@ app.controller('SenregistrerCtrl', ['$scope', '$ionicSlideBoxDelegate', '$http',
   		user.etab = dataService.getEtabId;
   		console.log( JSON.stringify(user));
 
-  		var res = $http.post('http://localhost:8888/projet-pizza/pizza-service/app/utilisateur/creer', user);
+  		var res = $http.post( urlService.api + 'app/utilisateur/creer', user);
 		res.success(function(data, status, headers, config) {
 			//$scope.message = data;
 			var msg = data.msg;

@@ -1,4 +1,12 @@
 {
   "name": "pizza-sidemenu",
-  "app_id": "d83b5fda"
+  "app_id": "d83b5fda",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

@@ -22,6 +22,6 @@ app.service('panier', function($rootScope){
 		this.liste.splice(id, 1);
 	};
 
-
+	this.articleId;
 
 });

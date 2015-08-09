@@ -7,31 +7,58 @@ angular.module('PizzaServices', [])
 	//var urlApi = 'http://fdacentral.com/api/pizza-service/etab/';
 
 	var urlJson = "data.json";
+	var dateCache;
+	
+	function checkDateCache(){
+		var date2 = new Date();
+		if ( !dateCache ) { 
+			dateCache = new Date();
+			console.log("dtc null");
+		}
+		console.log("dc " + dateCache);
+		var hours = Math.abs(dateCache - date2) / 36e5;
+		if (hours>1) { dateCache = date2; };
+		console.log("hours " + hours);
+		return hours;
+	}
+
 	return {
-		urlApi: 'http://fdacentral.com/api/pizza-service/',
+		
 		getEtabId: 2,
 		get: function (){
-			var promise
-			//if (!dataSave){
-				//console.log('dataSave ');
-				promise = $http.get( this.urlApi + 'etab/' + this.getEtabId )
+			var defer = $q.defer();
+
+			// test de cache sur 1h
+			//
+			var getDateCache = checkDateCache();
+			if (!dataSave || getDateCache>1){
+
+				$http.get( this.urlApi + 'etab/' + this.getEtabId )
 					.then(function(response){
 						//console.log("service liste : "+ JSON.stringify(response.data));
 		   				console.log('data from api');
 		   				this.getSave = response.data;
-		   				window.localStorage.setItem('dataSave',JSON.stringify(this.getSave));
+		   				window.localStorage.setItem('dataSave', JSON.stringify(this.getSave));
 		   				//var reponse = { "reponse" : "ok" }
-						return dataSave;
+						
+						defer.resolve( response.data );
 
 					}, function(response) {
 						// probleme de connexion !!!
 						console.log("errrorrrr : ");
 						//var reponse = { "reponse" : "erreur" }
-
-						return dataSave;
+						defer.reject( dataSave );
 
 					});
-				return promise;
+
+			} else {
+				//	
+				//
+				console.log('data from cache');
+				defer.resolve( dataSave );
+			}
+
+			return defer.promise;
 
 		},
 		getSave:dataSave
