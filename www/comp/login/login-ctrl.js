@@ -19,8 +19,8 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
 		    if (data.msg==="ok"){
 		    	console.log("token " + data.token);
 		    	localStorage.auth_token = data.token;
-		    	// UserService.infos = 
-		    	$state.go('app.infos');
+		    	//UserService.infos = 
+		    	$state.go(UserService.loginUrl);
 		    	//$state.transitionTo('app.infos')
 		    } else {
 		    	alert('email ou mot de passe incorrect.');

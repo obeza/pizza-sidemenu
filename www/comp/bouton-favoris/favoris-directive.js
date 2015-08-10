@@ -7,19 +7,23 @@ angular.module('btFavoris',[])
     link: function(scope, element, attrs) {
 
 
-      scope.$on('articleId', function(event, args) {
+      scope.favoris = false;
+      scope.$on('favorisStatut', function(event, args) {
 
-        console.log("article id " + args);
+        console.log("Statut " + args);
 
-        scope.siConn = false;
-        if (localStorage.auth_token) {
-          console.log("auth");
-          scope.siConn = true;
-        }
+        
 
       });
 
+      scope.siConn = true;
+      scope.$on('favorisLoading', function(event, args) {
 
+        console.log("loading " + args);
+        scope.loading = args;
+        
+
+      });
 
       
 

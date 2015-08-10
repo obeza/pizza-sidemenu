@@ -1,5 +1,5 @@
 
-app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', '$rootScope', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout, $rootScope){
+app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', '$rootScope', '$http', 'urlService', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout, $rootScope, $http, urlService){
 
   $scope.choixTaille = false;
 
@@ -34,7 +34,8 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
 
     console.log("articleId " + $scope.article.id);
 
-    $rootScope.$broadcast("articleId", $scope.article.id);
+    favorisGet($scope.article.id);
+    //$rootScope.$broadcast("articleId", $scope.article.id);
 
     if($scope.article.prix>0){
       //console.log("simple");
@@ -55,7 +56,52 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
 
   }
 
+  function favorisGet(id){  
+    //$rootScope.$broadcast('favorisLoading', true);
+    $scope.favorisLoading = true;
+    $scope.siConn = false;
+    $scope.favorisStatut = false;
+    $http.get(urlService.api + 'app/favoris/' + id).
+    success(function(data, status, headers, config) {
+      $scope.favorisLoading = false;
+      console.log("jaime : " + data.jaime);
+      $scope.favorisStatut = data.jaime=="y" ? true : false;
+      $scope.siConn = true;
+    }).
+    error(function(data, status, headers, config) {
+      // sans doute pas de connection Internet
+      $scope.favorisLoading = false;
+      $scope.siConn = false;
+    });
 
+  }
+
+  $scope.favorisClick = function(id){
+    $scope.favorisLoading = true;
+    var jaime;
+    if ($scope.favorisStatut) {
+      jaime = 'n';
+      $scope.favorisStatut = false;
+    } else {
+      jaime = 'y';
+      $scope.favorisStatut = true;
+    }
+    console.log('click ' + jaime);
+    
+    var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime;
+    console.log('url ' + url);
+    $http.get( url ).
+    success(function(data, status, headers, config) {
+      $scope.favorisLoading = false;
+      console.log("msg jaime retour : " + data.msg);
+      
+    }).
+    error(function(data, status, headers, config) {
+      // sans doute pas de connection Internet
+      $scope.favorisLoading = false;
+      $scope.siConn = false;
+    });   
+  };
 
   $scope.fermerModalPizza = function(){
     $scope.modal.hide();

@@ -1,0 +1,91 @@
+
+<ion-view hide-nav-bar="true">
+
+  <ion-content class="padding back-articles">
+
+
+
+<div class="row">
+  <div class="col">
+    <a 
+          ui-sref="app.infos"
+          nav-transition="exit"
+          class="button button-icon button-clear ion-ios-close-outline icon-plus "
+          style="color:#000;"> 
+    </a>
+  </div>
+  <div class="col droite">
+    <a ng-show="loadingChange" class="button button-icon button-clear ion-load-d icon-plus" style="color:#000;"></a>
+  </div>
+</div>
+
+<form name="form" ng-submit="modifier()">
+<div class="card">
+  <div class="item item-text-wrap item-image">
+    <img src="img/top-pizza.jpg" width="100%">
+  </div>
+
+  <div class="list">
+
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Prénom</span>
+    <input type="text" placeholder="prénom" name="uPrenom" ng-model="infos.prenom" required >
+    <i ng-show="form.uPrenom.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"> Vous devez entrer un prénom</i>
+  </label>
+
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Nom</span>
+    <input type="text" placeholder="nom" name="uNom" ng-model="infos.nom" required >
+    <i ng-show="form.uNom.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"> Vous devez entrer un nom</i>
+  </label>
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Adresse</span>
+    <input type="text" placeholder="adress" name="uAdresse" ng-model="infos.adresse" required>
+    <i ng-show="form.uAdresse.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"> Vous devez entrer une adresse</i>
+  </label>
+
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Villes</span>
+    <select name="uVille" ng-model="infos.ville" required class="display-block" ng-options="idx as ville.nom for (idx, ville) in villes">
+    </select>
+  </label>
+
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Téléphone</span>
+    <input type="tel" name="uTel" placeholder="téléphone" ng-model="infos.tel" 
+    required maxlength="10" minlength="10">
+    <i ng-show="form.uTel.$error.minlength || form.uTel.$error.required" class="icon ion-close-round placeholder-icon form-icon-required assertive"> Vous devez entrer un numéro</i>
+  </label>
+
+  <!--
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">Email</span>
+    <input type="email" placeholder="email" ng-model="infos.email" name="uEmail" required ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+    <i ng-show="form.uEmail.$error.pattern || form.uEmail.$error.required" class="icon ion-close-round placeholder-icon form-icon-required assertive"> Vous devez entrer un email</i>
+  </label>
+  -->
+  
+</div>
+
+  <div class="item">
+    <button class="button button-block button-balanced" type="submit">
+      Enregistrer mes modifications
+    </button>
+    <a 
+    class="button button-block button-stable" 
+    ui-sref="app.infosmodifierpasse"
+    nav-direction="enter">
+      Modifier son mot de passe
+    </a>
+  </div>
+
+</div>
+</form>
+
+
+
+  </ion-content>
+
+</ion-view>
+
+

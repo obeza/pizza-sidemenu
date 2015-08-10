@@ -1,12 +1,47 @@
 
-<ion-view title="Menu">
+<ion-view title="Vos informations" hide-back-button="true">
 
-
+  <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+  </ion-nav-buttons>
     
-  <ion-content class="padding">
+  <ion-content class="padding back-articles">
 
 
-	<h1>Points : {{infos.point}}</h1>
+
+<div class="card">
+  <div class="item item-text-wrap item-image">
+    <img src="img/top-pizza.jpg" width="100%">
+    <div class="row">
+  		<div class="col centre infos-points-bar">
+  			<div><h1 class="balanced">{{infos.point-infos.redeem}}</h1></div>
+  			<div>Points</div>
+  		</div>
+  		<div class="col centre">qrCode</div>
+    </div>
+  </div>
+  <div class="item">
+    <h2 class="centre balanced">{{infos.prenom}} {{infos.nom}}</h2>
+    <p>{{infos.adresse}}</p>
+    <p>{{villes[infos.ville].nom}}</p>
+    <p>{{infos.tel}}</p>
+    <p>{{infos.email}}</p>
+  </div>
+  <div class="item">
+    <a 
+      ui-sref="app.infosmodifier" 
+      nav-direction="enter"
+      class="button button-block button-balanced">
+      Modifier mes informations
+    </a>
+    <button class="button button-block button-stable" ng-click="deconnecter()">
+      Se déconnecter
+    </button>
+  </div>
+</div>
+
+
 
 
 	gcm : {{gcmid}}

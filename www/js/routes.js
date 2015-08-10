@@ -63,12 +63,39 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('app.favoris', {
+    url: '/favoris',
+    views: {
+      'menuContent': {
+        templateUrl: 'comp/favoris/favoris-template.html',
+        controller: 'FavorisCtrl'
+      }
+    }
+  })
   .state('app.infos', {
     url: '/infos',
     views: {
       'menuContent': {
         templateUrl: 'comp/infos/infos-template.html',
         controller: 'InfosCtrl'
+      }
+    }
+  })
+  .state('app.infosmodifier', {
+    url: '/infos/modifier',
+    views: {
+      'menuContent': {
+        templateUrl: 'comp/infos-modifier/infos-modifier-tpl.html',
+        controller: 'InfosModifierCtrl'
+      }
+    }
+  })
+  .state('app.infosmodifierpasse', {
+    url: '/infos/modifier/passe',
+    views: {
+      'menuContent': {
+        templateUrl: 'comp/infos-modifier-passe/infos-modifier-passe-tpl.html',
+        controller: 'InfosModifierPasseCtrl'
       }
     }
   })

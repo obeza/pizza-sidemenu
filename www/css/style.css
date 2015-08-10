@@ -140,3 +140,13 @@ div.footer-button a.button.button-full {
 .bottom-space{
 	height:80px;
 }
+.infos-points-bar{
+	border-right: 1px solid #ddd;
+}
+.display-block{
+	display: block;
+}
+.icon-plus{
+	font-size:46px;
+	color:#000;
+}

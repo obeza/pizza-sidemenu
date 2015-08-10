@@ -1,0 +1,72 @@
+
+<ion-view hide-nav-bar="true">
+
+  <ion-content class="padding back-articles">
+
+
+
+<div class="row">
+  <div class="col">
+    <a 
+          ui-sref="app.infos"
+          nav-transition="exit"
+          class="button button-icon button-clear ion-ios-close-outline icon-plus "
+          style="color:#000;"> 
+    </a>
+  </div>
+  <div class="col droite">
+    <a ng-show="loadingChange" class="button button-icon button-clear ion-load-d icon-plus" style="color:#000;"></a>
+  </div>
+</div>
+
+<form name="form" ng-submit="modifier()">
+<div class="card">
+  <div class="item item-text-wrap item-image">
+    <img src="img/top-pizza.jpg" width="100%">
+  </div>
+
+  <div class="list">
+
+    <div class="item" ng-show="alert.show">
+      <p class="alert assertive">
+        <i class="icon ion-alert-circled"></i> {{alert.msg[alert.active]}}
+      </p>
+    </div>
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Votre mot de passe actuel</span>
+      <input type="password" placeholder="*****" name="uAcien" ng-model="passe.actu" required>
+    </label>
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Votre nouveau mot de passe</span>
+      <input type="password" placeholder="*****" name="uPasse1" ng-model="passe.nouv1" required>
+      <i ng-show="form.uNom.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"> Votre devez entrer un nom</i>
+    </label>
+
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Votre nouveau mot de passe une nouvelle fois</span>
+      <input type="password" placeholder="*****" name="uPasse2" ng-model="passe.nouv2" required>
+      <i ng-show="form.uAdresse.$error.required" class="icon ion-close-round placeholder-icon form-icon-required"> Vous devez entrer une adresse</i>
+    </label>
+
+
+
+  </div>
+
+  <div class="item">
+    <button class="button button-block button-balanced" type="submit">
+      Enregistrer mes modifications
+    </button>
+  </div>
+
+</div>
+</form>
+
+
+
+  </ion-content>
+
+</ion-view>
+
+

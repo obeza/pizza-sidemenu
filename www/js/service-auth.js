@@ -3,7 +3,7 @@ app.factory('authInterceptor', ['$q', '$location', function($q, $location){
     request: function(config){
       config.headers = config.headers || {};
       if (localStorage.auth_token) {
-        config.headers.token = localStorage.auth_token;
+        config.headers.auth_token = localStorage.auth_token;
       }
       return config;
     },

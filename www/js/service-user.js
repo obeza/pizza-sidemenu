@@ -18,7 +18,7 @@ app.factory('UserService', ['$http', 'dataService', function ($http, dataService
 				});
 			return promise;
 		},
-		loginUrl:null
+		loginUrl:""
 	
 	};
 

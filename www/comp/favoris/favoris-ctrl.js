@@ -1,4 +1,4 @@
-app.controller('FavorisCtrl', ['$scope','FavorisService', function ($scope, FavorisService) {
+app.controller('FavorisCtrl', ['$scope', function ($scope) {
 	
 	$scope.test = "ok";
 }]);
