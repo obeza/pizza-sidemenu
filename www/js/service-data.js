@@ -1,6 +1,6 @@
 
 angular.module('PizzaServices', [])
-.factory('dataService', function ($http, $q ) {
+.factory('dataService', function ($http, $q, urlService ) {
 
 	var dataSave =  JSON.parse(window.localStorage.getItem('dataSave'));
 
@@ -32,11 +32,11 @@ angular.module('PizzaServices', [])
 			//
 			var getDateCache = checkDateCache();
 			if (!dataSave || getDateCache>1){
-
-				$http.get( this.urlApi + 'etab/' + this.getEtabId )
+				console.log( 'url : ' + urlService.api + 'etab/' + this.getEtabId);
+				$http.get( urlService.api + 'etab/' + this.getEtabId )
 					.then(function(response){
 						//console.log("service liste : "+ JSON.stringify(response.data));
-		   				console.log('data from api');
+		   				alert('data from api');
 		   				this.getSave = response.data;
 		   				window.localStorage.setItem('dataSave', JSON.stringify(this.getSave));
 		   				//var reponse = { "reponse" : "ok" }

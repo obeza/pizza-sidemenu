@@ -25,7 +25,7 @@ $dark:                            #444 !default;
     border: none;
     border-top: 1px solid #464646;
     border-bottom: 2px solid #333333;
-    padding: 20px;
+    padding: 10px;
     color: #F0F1F1;
     max-height: none; }
     .dark .item:last-child {

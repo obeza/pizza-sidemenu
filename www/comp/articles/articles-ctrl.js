@@ -2,6 +2,7 @@
 app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', '$rootScope', '$http', 'urlService', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout, $rootScope, $http, urlService){
 
   $scope.choixTaille = false;
+  var auth_token = localStorage.auth_token;
 
 	// dataService.get().then( function(d){
 	// 	//console.log( "reponse2 : " + JSON.stringify(d) );
@@ -61,7 +62,8 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
     $scope.favorisLoading = true;
     $scope.siConn = false;
     $scope.favorisStatut = false;
-    $http.get(urlService.api + 'app/favoris/' + id).
+    console.log('ulr ' + urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/token/" + auth_token);
+    $http.get(urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/token/" + auth_token).
     success(function(data, status, headers, config) {
       $scope.favorisLoading = false;
       console.log("jaime : " + data.jaime);
@@ -88,11 +90,14 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
     }
     console.log('click ' + jaime);
     
-    var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime;
+    var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime + "/token/" + auth_token;
     console.log('url ' + url);
     $http.get( url ).
     success(function(data, status, headers, config) {
       $scope.favorisLoading = false;
+      if (data.msg==="token"){
+        $scope.siConn = false;
+      }
       console.log("msg jaime retour : " + data.msg);
       
     }).
