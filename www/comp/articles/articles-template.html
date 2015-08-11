@@ -10,10 +10,9 @@
         </button>
       </ion-nav-buttons>
 
-
       <ion-nav-buttons side="right">
         <panier-ouvrir></panier-ouvrir>
-    </ion-nav-buttons>
+      </ion-nav-buttons>
 
     </ion-nav-bar>
 
@@ -25,17 +24,21 @@
           ng-repeat="article in articles | filter:{categorie:catId}"
           ng-click="voir(indexDe(article))"
           class="item item-thumbnail-left"
+          
 	    	>
-	    		<img lazy-img="img/article-pizza.jpeg" alt="">
+	    		<img 
+            ng-src="{{imageUrl(article.id)}}"
+            detect-img 
+          >
 	    		<h3>{{article.nom}}</h3>
 	    		<p>{{article.description}}</p>
 	    		<p ng-show="article.prix>0">Prix : {{article.prix}}€</p>
           <p ng-show="article.prix<=0">Prix : petite {{article.prix1}}€, moyenne {{article.prix2}}€, grande {{article.prix3}}€</p>
-	    		<div class="droite"><button class="button bt-ajouter button-energized" >Ajouter</button>
-        </div>
+	    		<div class="droite">
+            <button class="button bt-ajouter button-energized" >Ajouter</button>
+          </div>
 
-	      	</div>
-
+	      </div>
 
 	</div>
 

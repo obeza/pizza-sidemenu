@@ -41,12 +41,33 @@ $ionicPlatform.registerBackButtonAction(function (event) {
 .config(['$ionicConfigProvider',function($ionicConfigProvider) {
 
   $ionicConfigProvider.backButton.previousTitleText(false)
-  $ionicConfigProvider.backButton.text('Retour');
+  $ionicConfigProvider.backButton.text('');
   $ionicConfigProvider.views.forwardCache(false);
   $ionicConfigProvider.views.maxCache(0);
 
 }])
 
+.directive('detectImg', function () {
+
+    return function(scope, el, attr) {
+                //scope.checkImage = true;
+                //scope.checkImage[scope.detectImg] = true;
+                
+               
+                el.bind('error', function() {                
+                  
+                  el.attr('src', 'img/imgprov.jpg');
+                });
+    //             el.bind('load', function() {
+    //               console.log('detect...');
+    //               //scope.checkImage[imgIndex] = false;
+    //               scope.checkimage(attr.detectImg, true);
+    //               el.removeClass("hidden");
+    //             });
+    }
+    
+
+});
 
 
-;
+

@@ -1,5 +1,5 @@
 
-app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', '$rootScope', '$http', 'urlService', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout, $rootScope, $http, urlService){
+app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionicModal', 'panier', '$ionicPopup', '$timeout', '$rootScope', '$http', 'urlService', 'imageService', function($scope, dataService, $stateParams, $ionicModal, panier, $ionicPopup, $timeout, $rootScope, $http, urlService, imageService){
 
   $scope.choixTaille = false;
   var auth_token = localStorage.auth_token;
@@ -19,6 +19,24 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
     	var idx = $scope.articles.indexOf(obj);
     	return idx;
 	}
+
+  // $scope.checkImage = function(id){
+  //   var img = 'http://fdacentral.com/img/pizza/art'+id+'.jpg';
+  //   return img; 
+  // };
+
+  $scope.imageUrl = function(id){
+    var url = imageService.url(id);
+    //console.log('coucou');
+    return url;
+  };
+  
+$scope.test = "lkkk";
+  $scope.checkImage = [];
+
+  $scope.checkimage = function(index, valeur){
+    $scope.checkImage[index]= valeur;
+  };
 
   //
   // template pour les articles pizza

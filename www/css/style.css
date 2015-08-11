@@ -150,3 +150,6 @@ div.footer-button a.button.button-full {
 	font-size:46px;
 	color:#000;
 }
+.hidden {
+    display: none;
+}
