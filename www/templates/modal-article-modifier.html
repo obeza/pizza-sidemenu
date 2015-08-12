@@ -14,7 +14,12 @@
  
  <ul class="list">
     <li class="item">
-      <div><img src="img/article-pizza.jpeg" alt=""></div>
+      <div class="centre">
+        <img 
+            ng-src="{{imageUrl(article.id)}}"
+            detect-img 
+          >
+        </div>
        {{article.description}}
     </li> 
     <li class="item article"> 

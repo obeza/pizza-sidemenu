@@ -9,6 +9,7 @@ app.controller('InfosCtrl', ['$scope', '$http', '$ionicLoading', 'dataService', 
 
     $scope.villes = dataService.villes;
 
+    //	on désigne la page où l'utilisateur sera redirigé s'il n'est pas logué
     UserService.loginUrl = "app.infos";
 
 	$http.get(urlService.api + 'app/utilisateur/infos/' + localStorage.auth_token).
@@ -36,6 +37,7 @@ app.controller('InfosCtrl', ['$scope', '$http', '$ionicLoading', 'dataService', 
 	//
 	$scope.deconnecter = function(){
 		localStorage.auth_token = null;
+		UserService.infos = {};
 		$state.go('app.login');
 	};
 

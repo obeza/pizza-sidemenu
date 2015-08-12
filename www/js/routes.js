@@ -108,6 +108,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
+  .state('app.livraison', {
+    url: '/livraison',
+    views: {
+      'menuContent': {
+        templateUrl: 'comp/livraison/livraison-tpl.html',
+        controller: 'LivraisonCtrl'
+      }
+    }
+  })
 ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/menu');

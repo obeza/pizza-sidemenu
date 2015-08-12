@@ -14,7 +14,10 @@
           ng-click="voir(indexDe(article))"
           class="item item-thumbnail-left"
 	    	>
-	    		<img lazy-img="img/article-pizza.jpeg" alt="">
+	    		<img 
+            ng-src="{{imageUrl(article.id)}}"
+            detect-img 
+          >
 	    		<h3>{{article.nom}} - {{article.id}}</h3>
 	    		<p>{{article.description}}</p>
 	    		<p ng-show="article.prix>0">Prix : {{article.prix}}€</p>

@@ -24,4 +24,6 @@ app.service('panier', function($rootScope){
 
 	this.articleId;
 
+	this.livraison = true;
+
 });

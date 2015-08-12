@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'ngCordova', 'angularLazyImg'])
+var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'ngCordova', 'angularLazyImg', 'UserService'])
 
-.run(function($ionicPlatform, $rootScope) {
+.run(function($ionicPlatform, $rootScope, UserService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -23,7 +23,7 @@ var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'n
 
   $rootScope.quantite = 0;
 
-$ionicPlatform.registerBackButtonAction(function (event) {
+  $ionicPlatform.registerBackButtonAction(function (event) {
     if($ionicHistory.currentStateName() == "app.senregistrer"){
       event.preventDefault();
       // or do nothing
@@ -36,14 +36,20 @@ $ionicPlatform.registerBackButtonAction(function (event) {
     }
   }, 100);
 
+  UserService.getInfos();
+
 })
 
-.config(['$ionicConfigProvider',function($ionicConfigProvider) {
+
+.config(['$ionicConfigProvider',function($ionicConfigProvider ) {
 
   $ionicConfigProvider.backButton.previousTitleText(false)
   $ionicConfigProvider.backButton.text('');
   $ionicConfigProvider.views.forwardCache(false);
   $ionicConfigProvider.views.maxCache(0);
+
+  // on charge les infos depuis le localStorage, s'il y en a.
+  //UserService.getInfos();
 
 }])
 

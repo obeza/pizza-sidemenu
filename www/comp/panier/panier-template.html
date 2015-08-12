@@ -20,7 +20,10 @@
             ng-click="voir(indexDe(article))"
             class="item item-thumbnail-left"
         >
-            <img src="img/article-pizza.jpeg" alt="">
+            <img 
+            ng-src="{{imageUrl(article.id)}}"
+            detect-img 
+          >
   	    		<h3>{{article.nom}}</h3>
             <p>Qte : {{article.quantite}}</p>
 
@@ -43,12 +46,15 @@
     </div>
   </div>
 
+
+
+
   <a
     ng-show="getTotalPrix()>0"
-    href="#/app/caisse"
+    href="#/app/livraison"
     nav-direction="enter"
-    class="button button-block button-energized">
-    Passer la commande
+    class="button button-block button-balanced">
+    Choisissez votre type de livraison
   </a>
 
 

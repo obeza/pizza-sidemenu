@@ -1,0 +1,67 @@
+<ion-view title="Livraison">
+
+
+  <ion-content class="padding back-articles">
+
+<div class="card">
+  <div class="item item-text-wrap">
+    <h2 class="centre"><b>Choisissez votre type de livraison</b></h2>
+  </div>
+</div>
+
+
+    <div class="card" ng-click="choixLivraison()">
+      <div 
+        class="item item-divider"
+        ng-class="{'card-fond-titre':livraison}"
+      >
+        Livraison à votre domicile
+        <i class="icon ion-checkmark" ng-show="livraison"></i>
+      </div>
+      <div 
+        class="item item-text-wrap"
+        ng-class="{'card-fond':livraison}"
+      >
+        <h2><b>Prénom & Nom :</b> {{infos.prenom}} {{infos.nom}}</h2>
+        <h2><b>adresse :</b> {{infos.adresse}}</h2>
+        <h2><b>téléphone :</b> {{infos.tel}}</h2>
+      </div>
+    </div>
+
+    <div class="card" ng-click="choixLivraison()">
+      <div 
+        class="item item-divider"
+        ng-class="{'card-fond-titre':!livraison}"
+      >
+        Récupération sur place
+        <i class="icon ion-checkmark" ng-show="!livraison"></i>
+      </div>
+      <div 
+        class="item item-text-wrap"
+        ng-class="{'card-fond':!livraison}"
+      >
+        <h2>Nous vous attendrons à notre pizzaria.</h2>
+        <h2><b>Notre adresse :</b> 13 rue de la rue d'Italie.</h2>
+      </div>
+    </div>
+
+
+<div class="row">
+  <div class="col col-50 col-offset-50">
+    
+  <button   
+    ng-click="goCaisse()"
+    nav-direction="enter"
+    class="button button-block button-balanced ">
+    Passer la commande
+  </button>
+
+  </div>
+</div>
+
+
+
+
+
+  </ion-content>
+</ion-view>

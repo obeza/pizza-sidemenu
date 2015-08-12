@@ -1,4 +1,4 @@
-app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService', '$ionicModal', 'panier', '$ionicPopup', '$timeout', function ($scope, $ionicLoading, $http, urlService, $ionicModal, panier, $ionicPopup, $timeout) {
+app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService', '$ionicModal', 'panier', '$ionicPopup', '$timeout', 'imageService', function ($scope, $ionicLoading, $http, urlService, $ionicModal, panier, $ionicPopup, $timeout, imageService) {
 	
 	$scope.test = "ok";
   $scope.choixTaille = false;
@@ -35,6 +35,13 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
     	var idx = $scope.articles.indexOf(obj);
     	return idx;
 	}
+
+    $scope.imageUrl = function(id){
+    var url = imageService.url(id);
+    //console.log('coucou');
+    return url;
+  };
+
 
   $scope.voir = function(article) {
     $scope.article = $scope.articles[article];

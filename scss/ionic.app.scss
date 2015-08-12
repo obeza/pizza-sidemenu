@@ -20,6 +20,9 @@ $positive:#0088cc !default;
 
 $balanced:#58D2BD !default;
 
+
+
+
 @import 'dark';
 @import 'www/comp/articles/articles';
 
@@ -35,4 +38,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .alert.assertive{
 	color:$assertive;
+}
+
+.card-border {
+	border : 1px solid $energized;
+}
+
+.card-fond {
+	background: $energized;
+	border : 1px solid $energized;
+}
+
+.card-fond-titre {
+	background: darken( $energized, 10% );
+	border : 1px solid $energized;
 }

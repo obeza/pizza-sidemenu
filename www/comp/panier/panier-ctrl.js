@@ -1,4 +1,4 @@
-app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope, panier, $ionicModal){
+app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', 'imageService', function($scope, panier, $ionicModal, imageService){
 
 	$scope.articles = panier.liste;
   $scope.prixTotal = 0;
@@ -23,6 +23,12 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', function($scope,
       var idx = $scope.articles.indexOf(obj);
       return idx;
   }
+
+    $scope.imageUrl = function(id){
+    var url = imageService.url(id);
+    //console.log('coucou');
+    return url;
+  };
 
   //
   // template pour les articles pizza

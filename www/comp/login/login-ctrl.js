@@ -12,16 +12,19 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
     	});
 
 		var url = urlService.api + 'app/utilisateur/login';
+		console.log("url " + url);
 
 		$http.post( url, login ).
 		success(function(data, status, headers, config) {
 		    $ionicLoading.hide();
 		    if (data.msg==="ok"){
-		    	console.log("token " + data.token);
+		    	console.log("infos " + JSON.stringify(data.infos));
 		    	localStorage.auth_token = data.token;
+		    	UserService.setInfos(data.infos);
 		    	//UserService.infos = 
 		    	$state.go(UserService.loginUrl);
-		    	//$state.transitionTo('app.infos')
+		    	//$state.transitionTo('app.infos');
+
 		    } else {
 		    	alert('email ou mot de passe incorrect.');
 		    }
@@ -31,6 +34,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		    alert('impossible de se connecter...');
+		    $ionicLoading.hide();
 		});
 	};
 

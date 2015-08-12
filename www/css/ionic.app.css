@@ -7731,3 +7731,14 @@ a.button {
 
 .alert.assertive {
   color: #ef473a; }
+
+.card-border {
+  border: 1px solid #f9c169; }
+
+.card-fond {
+  background: #f9c169;
+  border: 1px solid #f9c169; }
+
+.card-fond-titre {
+  background: #f7ad38;
+  border: 1px solid #f9c169; }

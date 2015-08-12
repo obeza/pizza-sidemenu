@@ -1,6 +1,6 @@
 app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService', '$http', 'PaypalService', 'urlService', function ($scope, $ionicLoading, panier, dataService, $http, PaypalService, urlService) {
 	
-
+console.log('panier.livraison '+ panier.livraison);
 	var userId;
 
 	$ionicLoading.show();
