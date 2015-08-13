@@ -12,13 +12,21 @@ app.controller('InfosCtrl', ['$scope', '$http', '$ionicLoading', 'dataService', 
     //	on désigne la page où l'utilisateur sera redirigé s'il n'est pas logué
     UserService.loginUrl = "app.infos";
 
-	$http.get(urlService.api + 'app/utilisateur/infos/' + localStorage.auth_token).
+    var infos = UserService.infos;
+    console.table(infos);
+
+    if (!infos.id){
+    	$state.go('app.login');
+    }
+
+	$http.get(urlService.api + 'app/utilisateur/infos/' + infos.id ).
 	  success(function(data, status, headers, config) {
 	    // this callback will be called asynchronously
 	    // when the response is available
 	    console.log('data suce ' + JSON.stringify(data));
 	    $scope.infos = data;
-	    UserService.infos = data;
+	    //UserService.infos = data;
+	    UserService.setInfos(data);
 	    $ionicLoading.hide();
 	  }).
 	  error(function(data, status, headers, config) {

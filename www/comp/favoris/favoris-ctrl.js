@@ -1,19 +1,20 @@
-app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService', '$ionicModal', 'panier', '$ionicPopup', '$timeout', 'imageService', function ($scope, $ionicLoading, $http, urlService, $ionicModal, panier, $ionicPopup, $timeout, imageService) {
+app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService', '$ionicModal', 'panier', '$ionicPopup', '$timeout', 'imageService', 'UserService', function ($scope, $ionicLoading, $http, urlService, $ionicModal, panier, $ionicPopup, $timeout, imageService, UserService) {
 	
 	$scope.test = "ok";
   $scope.choixTaille = false;
 	$scope.articles = [];
 	var auth_token = localStorage.auth_token;
+  UserService.loginUrl = "app.favoris";
 
 	$ionicLoading.show();
 
-	$http.get(urlService.api + 'app/favoris/liste/' + localStorage.auth_token).
+	$http.get(urlService.api + 'app/favoris/liste/' + auth_token).
 	success(function(data, status, headers, config) {
 	    // this callback will be called asynchronously
 	    // when the response is available
 	    
-	    $scope.articles = data;
-	    console.table($scope.articles);
+	    $scope.articles = data.data;
+	    console.table(data.data);
 	    $ionicLoading.hide();
 	}).
 	error(function(data, status, headers, config) {
@@ -21,7 +22,7 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
 	    // or server returns response with an error status.
 	    //alert('data ' + data);
 	    $ionicLoading.hide();
-	    //alert('impossible de se connecter sur le serveur...');
+	    alert('connection impossible...');
 	});
 
   $ionicModal.fromTemplateUrl('templates/modal-article-ajouter.html', {
@@ -83,6 +84,7 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
       $scope.favorisLoading = false;
       console.log("jaime : " + data.jaime);
       $scope.favorisStatut = data.jaime=="y" ? true : false;
+
       $scope.siConn = true;
     }).
     error(function(data, status, headers, config) {
@@ -99,6 +101,23 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
     if ($scope.favorisStatut) {
       jaime = 'n';
       $scope.favorisStatut = false;
+
+      //
+      //  on supprime du tableau l'article qu'on n'aime plus
+      //
+        var result = null;
+        for (var i = 0; i < $scope.articles.length; i++) { 
+          if ($scope.articles[i].id === id) { 
+            result = i;
+            break;
+          } 
+        }
+        console.log("remove ---" + result);
+        $scope.articles.splice(result, 1);
+      //
+      //
+      //
+
     } else {
       jaime = 'y';
       $scope.favorisStatut = true;

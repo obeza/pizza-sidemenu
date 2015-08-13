@@ -19,7 +19,7 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
 		    $ionicLoading.hide();
 		    if (data.msg==="ok"){
 		    	console.log("infos " + JSON.stringify(data.infos));
-		    	localStorage.auth_token = data.token;
+		    	localStorage.auth_token = data.token;		    	
 		    	UserService.setInfos(data.infos);
 		    	//UserService.infos = 
 		    	$state.go(UserService.loginUrl);

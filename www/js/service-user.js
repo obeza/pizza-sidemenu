@@ -9,7 +9,18 @@ factory('UserService', ['$http', 'dataService', '$state', function ($http, dataS
 	return {
 		infos:{},
 		getInfos: function(){
-			this.infos = JSON.parse( window.localStorage.getItem('userInfos') );
+			if (this.infos.id){
+				console.log('arf');
+			} else {
+				var infos = JSON.parse( window.localStorage.getItem('userInfos') );
+				if (infos){
+					this.infos = infos;
+					console.log('infos ' + this.infos);
+					//return infos;
+				} else {
+					// problem !!!
+				}
+			}
 		},
 		setInfos: function(infos){
 			this.infos = infos;

@@ -7,6 +7,8 @@ app.controller('LivraisonCtrl', ['$scope', 'UserService', 'panier', '$state', fu
 	//	on désigne la page où l'utilisateur sera redirigé s'il n'est pas logué
     UserService.loginUrl = "app.infos";
 
+    
+
 	if (UserService.infos){
 		$scope.infos = UserService.infos;
 		console.table($scope.infos);

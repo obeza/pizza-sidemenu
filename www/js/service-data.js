@@ -36,7 +36,7 @@ angular.module('PizzaServices', [])
 				$http.get( urlService.api + 'etab/' + this.getEtabId )
 					.then(function(response){
 						//console.log("service liste : "+ JSON.stringify(response.data));
-		   				alert('data from api');
+		   				console.log('data from api');
 		   				this.getSave = response.data;
 		   				window.localStorage.setItem('dataSave', JSON.stringify(this.getSave));
 		   				//var reponse = { "reponse" : "ok" }
