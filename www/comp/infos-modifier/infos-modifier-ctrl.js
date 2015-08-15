@@ -12,7 +12,7 @@ app.controller('InfosModifierCtrl', ['$scope', 'UserService', 'dataService', '$i
   		$ionicLoading.show({ template: 'Chargement...' });
 
 
-  		var res = $http.post( urlService.api + 'app/utilisateur/modifier/' + localStorage.auth_token, $scope.infos);
+  		var res = $http.post( urlService.api + 'app/utilisateur/modifier' , $scope.infos);
 		res.success(function(data, status, headers, config) {
 			//$scope.message = data;
 			$ionicLoading.show({ template: 'Vos modifications ont été sauvegardées !' });

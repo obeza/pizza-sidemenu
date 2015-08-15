@@ -75,17 +75,22 @@ $scope.test = "lkkk";
 
   }
 
+  //
+  // -- debut directive à faire --
+  //
+  
   function favorisGet(id){  
     //$rootScope.$broadcast('favorisLoading', true);
     $scope.favorisLoading = true;
     $scope.siConn = false;
     $scope.favorisStatut = false;
-    console.log('ulr ' + urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/token/" + auth_token);
-    $http.get(urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/token/" + auth_token).
+    console.log('ulr ' + urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement );
+    $http.get(urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement ).
     success(function(data, status, headers, config) {
       $scope.favorisLoading = false;
       console.log("jaime : " + data.jaime);
       $scope.favorisStatut = data.jaime=="y" ? true : false;
+
       $scope.siConn = true;
     }).
     error(function(data, status, headers, config) {
@@ -102,15 +107,40 @@ $scope.test = "lkkk";
     if ($scope.favorisStatut) {
       jaime = 'n';
       $scope.favorisStatut = false;
+
+      //
+      //  on supprime du tableau l'article qu'on n'aime plus
+      //
+        var result = null;
+        for (var i = 0; i < $scope.articles.length; i++) { 
+          if ($scope.articles[i].id === id) { 
+            result = i;
+            break;
+          } 
+        }
+        console.log("remove ---" + result);
+        $scope.articles.splice(result, 1);
+      //
+      //
+      //
+
     } else {
       jaime = 'y';
       $scope.favorisStatut = true;
     }
     console.log('click ' + jaime);
     
-    var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime + "/token/" + auth_token;
-    console.log('url ' + url);
-    $http.get( url ).
+    //var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime ;
+    //console.log('url ' + url);
+    
+    var data = {
+      id:id,
+      etab:$scope.article.etablissement,
+      jaime:jaime
+    };
+    console.table(data);
+
+    $http.post( urlService.api + 'app/favoris', data ).
     success(function(data, status, headers, config) {
       $scope.favorisLoading = false;
       if (data.msg==="token"){
@@ -125,6 +155,10 @@ $scope.test = "lkkk";
       $scope.siConn = false;
     });   
   };
+
+  //
+  // -- fin directive à faire >>>
+  //
 
   $scope.fermerModalPizza = function(){
     $scope.modal.hide();

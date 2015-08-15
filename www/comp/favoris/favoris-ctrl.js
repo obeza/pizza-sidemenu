@@ -8,7 +8,7 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
 
 	$ionicLoading.show();
 
-	$http.get(urlService.api + 'app/favoris/liste/' + auth_token).
+	$http.get(urlService.api + 'app/favoris/liste').
 	success(function(data, status, headers, config) {
 	    // this callback will be called asynchronously
 	    // when the response is available
@@ -72,14 +72,17 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
 
   }
 
-
+  //
+  // -- debut directive à faire --
+  //
+  
   function favorisGet(id){  
     //$rootScope.$broadcast('favorisLoading', true);
     $scope.favorisLoading = true;
     $scope.siConn = false;
     $scope.favorisStatut = false;
-    console.log('ulr ' + urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/token/" + auth_token);
-    $http.get(urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/token/" + auth_token).
+    console.log('ulr ' + urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement );
+    $http.get(urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement ).
     success(function(data, status, headers, config) {
       $scope.favorisLoading = false;
       console.log("jaime : " + data.jaime);
@@ -124,9 +127,17 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
     }
     console.log('click ' + jaime);
     
-    var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime + "/token/" + auth_token;
-    console.log('url ' + url);
-    $http.get( url ).
+    //var url = urlService.api + 'app/favoris/' + id + "/etab/" + $scope.article.etablissement + "/jaime/" + jaime ;
+    //console.log('url ' + url);
+    
+    var data = {
+      id:id,
+      etab:$scope.article.etablissement,
+      jaime:jaime
+    };
+    console.log('data ' + data);
+
+    $http.post( urlService.api + 'app/favoris', data ).
     success(function(data, status, headers, config) {
       $scope.favorisLoading = false;
       if (data.msg==="token"){
@@ -141,6 +152,10 @@ app.controller('FavorisCtrl', ['$scope', '$ionicLoading', '$http', 'urlService',
       $scope.siConn = false;
     });   
   };
+
+  //
+  // -- fin directive à faire >>>
+  //
 
   $scope.fermerModalPizza = function(){
     $scope.modal.hide();

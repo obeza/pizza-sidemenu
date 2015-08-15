@@ -36,7 +36,8 @@ var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'n
     }
   }, 100);
 
-  UserService.getInfos();
+  // initialise le menu au démarage
+  // UserService.getInfos();
 
 })
 

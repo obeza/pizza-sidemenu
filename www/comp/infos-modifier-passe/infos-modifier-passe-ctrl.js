@@ -22,9 +22,10 @@ app.controller('InfosModifierPasseCtrl', ['$scope', 'UserService', 'dataService'
 
 	  		$ionicLoading.show({ template: 'Chargement...' });
 
-	  		$http.post( urlService.api + 'app/utilisateur/modifier/passe/' + localStorage.auth_token, $scope.passe)
+	  		$http.post( urlService.api + 'app/utilisateur/modifier/passe' , $scope.passe)
 			.success(function(data, status, headers, config) {
 				//$scope.message = data;
+				console.log("msg " + data.msg);
 				if (data.msg==="ok"){
 					$ionicLoading.show({ template: 'Vos modifications ont été sauvegardées !' });
 					$timeout(function() {

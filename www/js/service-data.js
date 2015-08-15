@@ -7,17 +7,23 @@ angular.module('PizzaServices', [])
 	//var urlApi = 'http://fdacentral.com/api/pizza-service/etab/';
 
 	var urlJson = "data.json";
-	var dateCache;
+	var dateLS = window.localStorage.getItem('dateCache')
+	var dateCache = dateLS ? new Date(dateLS) : null;
+	console.log("init date " + dateCache);
 	
 	function checkDateCache(){
 		var date2 = new Date();
 		if ( !dateCache ) { 
 			dateCache = new Date();
-			console.log("dtc null");
+			window.localStorage.setItem('dateCache', dateCache);
+			console.log("date localStorage est null");
 		}
 		console.log("dc " + dateCache);
 		var hours = Math.abs(dateCache - date2) / 36e5;
-		if (hours>1) { dateCache = date2; };
+		if (hours>1) { 
+			dateCache = date2;
+			window.localStorage.setItem('dateCache', dateCache);
+		};
 		console.log("hours " + hours);
 		return hours;
 	}
