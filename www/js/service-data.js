@@ -68,12 +68,18 @@ angular.module('PizzaServices', [])
 
 		},
 		getSave:dataSave,
+		loadSave:function(){
+			var defer = $q.defer();
+			var data = JSON.parse(window.localStorage.getItem('dataSave'))
+			defer.resolve( data );
+
+			return defer.promise;
+		},
 		villes : [ 
 			{ "nom":"Basse-Pointe"},
 			{ "nom":"Bellefontaine"},
 			{ "nom":"Case-Pilote"},
-			{ "nom":"Ducos"},
-			
+			{ "nom":"Ducos"},			
 			{ "nom":"Fonds-Saint-Denis"},
 			{ "nom":"Fort-de-France" },
 			{ "nom":"Grand'Rivière"},

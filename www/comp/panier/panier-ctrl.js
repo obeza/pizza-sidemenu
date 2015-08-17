@@ -1,10 +1,10 @@
-app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', 'imageService', function($scope, panier, $ionicModal, imageService){
+app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', 'imageService', 'UserService', function($scope, panier, $ionicModal, imageService, UserService){
 
 	$scope.articles = panier.liste;
   $scope.prixTotal = 0;
 	$scope.test = "ok";
 
-
+  UserService.loginUrl = 'app.panier';
 
   $scope.getTotalPrix = function () {
     var i = 0,
@@ -116,11 +116,8 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', 'imageService', 
   **
   */
 
-  $scope.conn = false;
-  if (localStorage.auth_token){
-    $scope.conn = true;
+  $scope.conn = localStorage.auth_token==='null' ? false : true;
 
-  }
-
+  console.log('$scope.conn ' + $scope.conn);
 
 }]);

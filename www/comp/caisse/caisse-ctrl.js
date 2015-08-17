@@ -1,7 +1,7 @@
-app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService', '$http', 'PaypalService', 'urlService', function ($scope, $ionicLoading, panier, dataService, $http, PaypalService, urlService) {
+app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService', '$http', 'PaypalService', 'urlService', 'UserService', function ($scope, $ionicLoading, panier, dataService, $http, PaypalService, urlService, UserService) {
 	
-console.log('panier.livraison '+ panier.livraison);
-	var userId;
+	console.log('panier.livraison '+ panier.livraison);
+
 
 	$ionicLoading.show();
 
@@ -21,15 +21,20 @@ console.log('panier.livraison '+ panier.livraison);
 
 	var commande = {};
 	commande.etab = dataService.getEtabId;
+	commande.userid = UserService.infos.id;
 	commande.panier = panier.liste;
 	commande.total = getTotalPrix();
+	commande.livraison = panier.livraison;
 
-	$http.get( urlService.api + 'app/utilisateur/infos' ).
+	console.table(commande);
+
+	$http.post( urlService.api + 'app/commande', commande ).
 	  success(function(data, status, headers, config) {
 	    // this callback will be called asynchronously
 	    // when the response is available
-	    userId = data.id;
-	    paypal();
+	    console.log('data :')
+	    console.table(data);
+	    //paypal();
 	  }).
 	  error(function(data, status, headers, config) {
 	    // called asynchronously if an error occurs

@@ -47,10 +47,13 @@
   </div>
 
 
-
+  <a 
+    ng-hide="conn"
+    class="button button-block button-balanced"
+    ui-sref="app.login">se connecter</a>
 
   <a
-    ng-show="getTotalPrix()>0"
+    ng-if="getTotalPrix()>0 && conn==true"
     href="#/app/livraison"
     nav-direction="enter"
     class="button button-block button-balanced">

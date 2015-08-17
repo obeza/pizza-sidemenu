@@ -21,8 +21,11 @@ app.controller('LoginCtrl', ['$scope','$http', 'dataService', '$state', 'UserSer
 		    	console.log("infos " + JSON.stringify(data.infos));
 		    	localStorage.auth_token = data.token;		    	
 		    	UserService.setInfos(data.infos);
-		    	//UserService.infos = 
-		    	$state.go(UserService.loginUrl);
+		    	var lienRedirect = UserService.loginUrl;
+		    	if (!lienRedirect){
+		    		lienRedirect = 'app.infos';
+		    	}
+		    	$state.go( lienRedirect );
 		    	//$state.transitionTo('app.infos');
 
 		    } else {

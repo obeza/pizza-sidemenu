@@ -10,8 +10,13 @@ app.controller('ArticlesCtrl', ['$scope', 'dataService', '$stateParams', '$ionic
 
 	// });
 
-  var data = dataService.getSave;
-  $scope.articles = data['articles'];
+
+
+  dataService.loadSave().then( function(data){
+    console.table(data);
+    $scope.articles = data['articles'];
+  });
+  
 
 	$scope.catId = $stateParams.catId;
 

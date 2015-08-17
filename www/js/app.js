@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'ngCordova', 'angularLazyImg', 'UserService'])
 
-.run(function($ionicPlatform, $rootScope, UserService) {
+.run(function($ionicPlatform, $rootScope, UserService, dataService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -36,8 +36,9 @@ var app = angular.module('starter', ['ionic', 'PizzaServices', 'appConstant', 'n
     }
   }, 100);
 
-  // initialise le menu au démarage
-  // UserService.getInfos();
+  //initialise le menu au démarage
+  //UserService.getInfos();
+
 
 })
 
