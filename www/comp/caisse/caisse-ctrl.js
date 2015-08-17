@@ -26,20 +26,21 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
 	commande.total = getTotalPrix();
 	commande.livraison = panier.livraison;
 
-	console.table(commande);
+	//console.table(commande);
 
 	$http.post( urlService.api + 'app/commande', commande ).
 	  success(function(data, status, headers, config) {
 	    // this callback will be called asynchronously
 	    // when the response is available
-	    console.log('data :')
-	    console.table(data);
-	    //paypal();
+	    // console.log('data :')
+	    // console.table(data);
+	    commande.userid = data.id;
+	    paypal();
 	  }).
 	  error(function(data, status, headers, config) {
 	    // called asynchronously if an error occurs
 	    // or server returns response with an error status.
-	    alert('error ' + JSON.stringify(data));
+	    alert('connexion impossible ... ');
 	    $ionicLoading.hide();
 	    //alert('impossible de se connecter sur le serveur...');
 	  });
@@ -50,7 +51,7 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
                 PaypalService.makePayment(commande.total, "Total").then(
                 	function(data){
                 		
-                		alert('retour paypal ' + JSON.stringify(data.response));
+                		//alert('retour paypal ' + JSON.stringify(data.response));
                 		//alert('retour paypal ' + data.response.state);
 
                 		if ( data.response.state ==="approved"){
@@ -71,10 +72,11 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
 
 	// // //console.log('panier : ' + JSON.stringify(panier.liste) );
 	function pending(data){
-		commande.paypalres = data.id;
-		commande.userid = userId;
-		alert('pending ' + JSON.stringify(data));
-		$http.post( urlService.api + 'app/commande/statut/0', commande ).
+		var paypalInfos = {};
+		paypalInfos.payid = data.id;
+		paypalInfos.userid = commande.userId;
+		//alert('pending ' + JSON.stringify(data));
+		$http.post( urlService.api + 'app/commande/paypal', paypalInfos ).
 	  	then(function(response) {
 	  		$ionicLoading.hide();
 	  		
