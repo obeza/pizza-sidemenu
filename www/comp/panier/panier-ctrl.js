@@ -116,8 +116,17 @@ app.controller('PanierCtrl', ['$scope','panier', '$ionicModal', 'imageService', 
   **
   */
 
-  $scope.conn = localStorage.auth_token==='null' ? false : true;
+  //$scope.conn = localStorage.auth_token==='null' ? false : true;
+  if ( localStorage.auth_token==='null' || !localStorage.auth_token){
+    $scope.conn = false;
+  } else {
+    $scope.conn =true;
+  }
 
-  console.log('$scope.conn ' + $scope.conn);
+  //alert('token : ' + localStorage.auth_token);
+  //alert('$scope.conn ' + $scope.conn);
 
 }]);
+
+
+

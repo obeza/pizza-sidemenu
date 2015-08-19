@@ -21,12 +21,12 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
 
 	var commande = {};
 	commande.etab = dataService.getEtabId;
-	commande.userid = UserService.infos.id;
+	commande.userid = parseInt(UserService.infos.id);
 	commande.panier = panier.liste;
-	commande.total = getTotalPrix();
+	commande.total = parseFloat(getTotalPrix());
 	commande.livraison = panier.livraison;
 
-	//console.table(commande);
+	console.table(commande);
 
 	$http.post( urlService.api + 'app/commande', commande ).
 	  success(function(data, status, headers, config) {
@@ -34,8 +34,15 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
 	    // when the response is available
 	    // console.log('data :')
 	    // console.table(data);
-	    commande.userid = data.id;
-	    paypal();
+	    commande.id = data.id;
+	    console.table(data);
+	    if (data.id){
+	    	paypal();
+	    } else {
+	    	alert('connexion impossible ... ');
+	    }
+	    //alert('commande.userId ' + commande.userId);
+	    //
 	  }).
 	  error(function(data, status, headers, config) {
 	    // called asynchronously if an error occurs
@@ -74,8 +81,8 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
 	function pending(data){
 		var paypalInfos = {};
 		paypalInfos.payid = data.id;
-		paypalInfos.userid = commande.userId;
-		//alert('pending ' + JSON.stringify(data));
+		paypalInfos.commandeId = commande.id;
+		alert('pending ' + JSON.stringify(paypalInfos));
 		$http.post( urlService.api + 'app/commande/paypal', paypalInfos ).
 	  	then(function(response) {
 	  		$ionicLoading.hide();
@@ -85,7 +92,7 @@ app.controller('CaisseCtrl', ['$scope', '$ionicLoading', 'panier', 'dataService'
 	  		//$scope.msg = data.msg;
 	  		//alert('response ' + data );
 	  		if (data.msg==="ok"){
-	  			commande.id = data.id;
+	  			//commande.id = data.id;
 	  			$scope.id = commande.id;
 	  			//paypalService.initPaymentUI();	 
 	  		}

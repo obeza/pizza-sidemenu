@@ -11,6 +11,7 @@ app.controller('LivraisonCtrl', ['$scope', 'UserService', 'panier', '$state', fu
 
 	if (UserService.infos){
 		$scope.infos = UserService.infos;
+		console.log('ffffffuuuuuuccccckkk');
 		console.table($scope.infos);
 	} else {
 		UserService.delogin();

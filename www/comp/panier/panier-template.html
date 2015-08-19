@@ -1,8 +1,6 @@
 <ion-view title="Panier">
 
-
   <ion-content class="padding back-articles">
-
 
     <div class="card" ng-show="getTotalPrix()<=0">
       <div class="item item-text-wrap panier-vide">
@@ -10,10 +8,8 @@
       </div>
     </div>
 
-
     <div class="list">
-      <div
-      
+      <div     
       ng-repeat="article in articles track by $index"
       >
   	    <a
@@ -46,20 +42,21 @@
     </div>
   </div>
 
-
   <a 
     ng-hide="conn"
     class="button button-block button-balanced"
-    ui-sref="app.login">se connecter</a>
-
-  <a
-    ng-if="getTotalPrix()>0 && conn==true"
-    href="#/app/livraison"
-    nav-direction="enter"
-    class="button button-block button-balanced">
-    Choisissez votre type de livraison
+    ui-sref="app.login">
+    se connecter
   </a>
 
+  <a
+    ng-if="getTotalPrix()>0 && conn===true"
+    href="#/app/livraison"
+    nav-direction="enter"
+    class="button button-block button-balanced"
+  >
+    Choisissez votre type de livraison
+  </a>
 
   </ion-content>
 </ion-view>
